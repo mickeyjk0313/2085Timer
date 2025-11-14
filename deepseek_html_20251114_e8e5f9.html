@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循环倒计时器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>循环倒计时器</h1>
+            <p class="subtitle">3天(보호 상태) ↔ 1天(쟁탈 가능 상태) 循环</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="group-filter">
+                    <h3>分组筛选</h3>
+                    <div class="group-filter-buttons" id="groupFilter">
+                        <!-- 分组按钮会在这里动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="control-panel">
+                    <h2>添加新倒计时</h2>
+                    <div class="form-group">
+                        <label for="timerName">倒计时名称</label>
+                        <input type="text" id="timerName" placeholder="例如：원정3">
+                    </div>
+                    <div class="form-group">
+                        <label for="timerGroup">分组（联盟）</label>
+                        <input type="text" id="timerGroup" placeholder="例如：RDR">
+                    </div>
+                    <div class="form-group">
+                        <label for="initialPhase">初始状态</label>
+                        <select id="initialPhase">
+                            <option value="protection">보호 상태 (3天)</option>
+                            <option value="capture">쟁탈 가능 상태 (1天)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>当前阶段剩余时间</label>
+                        <div class="time-inputs">
+                            <input type="number" id="remainingDays" min="0" placeholder="天" value="0">
+                            <input type="number" id="remainingHours" min="0" max="23" placeholder="小时" value="0">
+                            <input type="number" id="remainingMinutes" min="0" max="59" placeholder="分钟" value="0">
+                            <input type="number" id="remainingSeconds" min="0" max="59" placeholder="秒" value="0">
+                        </div>
+                        <small id="remainingTimeHint"></small>
+                    </div>
+                    <button id="addTimerBtn" class="form-button">添加倒计时</button>
+                </div>
+
+                <div class="data-management">
+                    <h3>数据管理</h3>
+                    <div class="data-buttons">
+                        <button class="data-button export" id="exportBtn">导出数据</button>
+                        <button class="data-button import" id="importBtn">导入数据</button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timers-section">
+                <div class="timers-container" id="timersContainer">
+                    <div class="no-timers" id="noTimersMessage">暂无倒计时，请添加一个</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑模态框 -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2>编辑倒计时</h2>
+            <div class="form-group">
+                <label for="editTimerName">倒计时名称</label>
+                <input type="text" id="editTimerName" placeholder="例如：원정3">
+            </div>
+            <div class="form-group">
+                <label for="editTimerGroup">分组（联盟）</label>
+                <input type="text" id="editTimerGroup" placeholder="例如：RDR">
+            </div>
+            <div class="modal-actions">
+                <button class="cancel-btn" id="cancelEditBtn">取消</button>
+                <button class="form-button" id="saveEditBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
